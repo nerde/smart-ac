@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_234527) do
+ActiveRecord::Schema.define(version: 2019_06_28_001856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "device_snapshots", force: :cascade do |t|
+    t.bigint "device_id"
+    t.datetime "taken_at", null: false
+    t.decimal "temperature_celsius", precision: 5, scale: 2, null: false
+    t.decimal "humidity_percentage", precision: 5, scale: 2, null: false
+    t.decimal "carbon_monoxide_ppm", precision: 6, scale: 3, null: false
+    t.string "status", limit: 150, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_device_snapshots_on_device_id"
+  end
 
   create_table "devices", force: :cascade do |t|
     t.string "name"
@@ -25,4 +37,5 @@ ActiveRecord::Schema.define(version: 2019_06_27_234527) do
     t.index ["auth_token"], name: "index_devices_on_auth_token", unique: true
   end
 
+  add_foreign_key "device_snapshots", "devices"
 end
