@@ -12,6 +12,6 @@ class DevicesController < ApplicationController
   private
 
   def device_params
-    params.permit(:name, :serial_number, :firmware_version, :auth_token)
+    params.permit(:name, :serial_number, :firmware_version)
   end
 end

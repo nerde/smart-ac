@@ -1,24 +1,94 @@
-# README
+# Smart AC
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Smart AC allows monitoring AC devices over time.
 
-Things you may want to cover:
+## API Endpoints
 
-* Ruby version
+### `POST /devices`
 
-* System dependencies
+Registers a new device. It returns an authentication token that allows the device to then send information for
+monitoring.
 
-* Configuration
+Sample request body:
 
-* Database creation
+```json
+{
+  "name": "Sample Device",
+  "serial_number": "12345",
+  "firmware_version": "1.0"
+}
+```
 
-* Database initialization
+Required fields:
 
-* How to run the test suite
+* `serial_number`
+* `firmware_version`
 
-* Services (job queues, cache servers, search engines, etc.)
+Sample successful response (status `201`):
 
-* Deployment instructions
+```json
+{
+  "id": 1,
+  "name": "Sample Device",
+  "serial_number": "12345",
+  "firmware_version": "1.0",
+  "auth_token": "d3646be959da3ca215be13c683050f0d",
+  "created_at": "2019-06-29T00:00:00.000-00:00"
+}
+```
 
-* ...
+Sample error response (status `422`):
+
+```json
+{
+  "serial_number": ["can't be blank"],
+  "firmware_version": ["can't be blank"]
+}
+```
+
+### `POST /device_snapshots`
+
+A snapshot is a set of information about a device at a given time.
+
+It is required to provide the device's auth token as a request header, like: `Token: d3646be959da3ca215be13c683050f0d`
+
+Sample request body:
+
+```json
+{
+  "taken_at": "2019-06-29T00:00:00.000-00:00",
+  "temperature_celsius": 25.53,
+  "humidity_percentage": 43.32,
+  "carbon_monoxide_ppm": 5.232,
+  "status": "ok"
+}
+```
+
+All fields are required.
+
+Sample successful response (status `201`):
+
+```json
+{
+  "id": 1,
+  "taken_at": "2019-06-29T00:00:00.000-00:00",
+  "temperature_celsius": 25.53,
+  "humidity_percentage": 43.32,
+  "carbon_monoxide_ppm": 5.232,
+  "status": "ok"
+}
+```
+
+Sample error response (status `422`):
+
+```json
+{
+  "taken_at": ["can't be blank"],
+  "temperature_celsius": ["can't be blank"],
+  "humidity_percentage": ["can't be blank"],
+  "carbon_monoxide_ppm": ["can't be blank"],
+  "status": ["can't be blank"]
+}
+```
+
+This endpoint returns status `404 - Not Found` if the token provided does not match any device.
