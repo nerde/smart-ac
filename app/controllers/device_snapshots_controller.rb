@@ -1,4 +1,4 @@
-class DeviceSnapshotsController < ApplicationController
+class DeviceSnapshotsController < APIController
   before_action :set_device_snapshot, only: [:show, :edit, :update, :destroy]
 
   def create

@@ -1,4 +1,4 @@
-class DevicesController < ApplicationController
+class DevicesController < APIController
   def create
     @device = Device.new(device_params)
 
