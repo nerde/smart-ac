@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Given("the following devices:") do |table|
+Given('the following devices:') do |table|
   Device.create!(table.hashes)
 end
 
@@ -8,7 +8,7 @@ When('I create the following device:') do |table|
   post devices_path, table.rows_hash
 end
 
-When("device {string} reports the following snapshot:") do |auth_token, table|
+When('device {string} reports the following snapshot:') do |auth_token, table|
   header 'Token', auth_token
   post device_snapshots_path, table.rows_hash
 end

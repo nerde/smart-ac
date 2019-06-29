@@ -1,4 +1,6 @@
-Then("I should have the following device snapshots:") do |table|
+# frozen_string_literal: true
+
+Then('I should have the following device snapshots:') do |table|
   snapshots = DeviceSnapshot.order(:id).map do |snap|
     snap.attributes.merge(
       'temperature_celsius' => snap.temperature_celsius.to_s,
