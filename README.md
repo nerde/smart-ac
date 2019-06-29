@@ -108,3 +108,7 @@ Sample cURL command:
 ```
 curl -X POST -H "Token: 502913748e00eaceb265d507c743c43e" -d '{"snapshots": [{"taken_at": "2019-06-29T00:00:00.000-00:00", "temperature_celsius": 25.53, "humidity_percentage": 43.32, "carbon_monoxide_ppm": 5.232, "status": "ok"}]}' -H 'Content-Type: application/json' https://diego-smart-ac.herokuapp.com/device_snapshots
 ```
+
+## Web Admin
+
+Default user/password is admin@smartac.com / 123456789
