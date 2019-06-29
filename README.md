@@ -48,19 +48,21 @@ Sample error response (status `422`):
 
 ### `POST /device_snapshots`
 
-A snapshot is a set of information about a device at a given time.
+Creates snapshots for a device. A snapshot is a set of information about a device at a given time.
 
 It is required to provide the device's auth token as a request header, like: `Token: d3646be959da3ca215be13c683050f0d`
 
-Sample request body:
+Sample request body (allows up to 500 entries):
 
 ```json
 {
-  "taken_at": "2019-06-29T00:00:00.000-00:00",
-  "temperature_celsius": 25.53,
-  "humidity_percentage": 43.32,
-  "carbon_monoxide_ppm": 5.232,
-  "status": "ok"
+  "snapshots": [{
+    "taken_at": "2019-06-29T00:00:00.000-00:00",
+    "temperature_celsius": 25.53,
+    "humidity_percentage": 43.32,
+    "carbon_monoxide_ppm": 5.232,
+    "status": "ok"
+  }]
 }
 ```
 
@@ -69,14 +71,14 @@ All fields are required.
 Sample successful response (status `201`):
 
 ```json
-{
+[{
   "id": 1,
   "taken_at": "2019-06-29T00:00:00.000-00:00",
   "temperature_celsius": 25.53,
   "humidity_percentage": 43.32,
   "carbon_monoxide_ppm": 5.232,
   "status": "ok"
-}
+}]
 ```
 
 Sample error response (status `422`):
@@ -92,3 +94,5 @@ Sample error response (status `422`):
 ```
 
 This endpoint returns status `404 - Not Found` if the token provided does not match any device.
+
+It returns status `400 - Bad Request` if more than 500 items are sent at once.
