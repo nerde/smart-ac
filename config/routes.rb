@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: :index do
     put :lock, on: :member
     put :unlock, on: :member
+    post :invite, on: :collection
   end
 
   devise_for :users

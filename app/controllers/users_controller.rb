@@ -22,6 +22,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def invite
+    email = params[:email]
+
+    User.invite!(email: email)
+
+    redirect_to users_path, notice: "Invitation sent to #{email}"
+  end
+
   private
 
   def set_user
