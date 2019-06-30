@@ -22,6 +22,30 @@
   <dd><%= @last_snapshot&.carbon_monoxide_ppm || '-' %> PPM</dd>
 </dl>
 
-<div class="text-center">
+<div class="row mt-5 mb-3">
+  <div class="col-sm-8">
+    <h3 class="">Monitoring</h3>
+  </div>
+
+  <div class="col-sm-4">
+    <%= form_tag @device, method: :get do %>
+      <%= hidden_field_tag :since, params[:since] %>
+      <%= hidden_field_tag :upto, params[:upto] %>
+      <%= text_field_tag :date, "#{@since.to_time.strftime('%B %d, %y')} - #{@upto.to_time.strftime('%B %d, %y')}",
+                         class: 'dates-picker form-control text-center', name: nil %>
+    <% end %>
+  </div>
+</div>
+
+<h4 class="text-center">Temperature (ºC)</h4>
+<%= line_chart @snapshots.group_by_period(@period, :taken_at).average(:temperature_celsius) %>
+
+<h4 class="text-center mt-3">Humidity (%)</h4>
+<%= line_chart @snapshots.group_by_period(@period, :taken_at).average(:humidity_percentage) %>
+
+<h4 class="text-center mt-3">Carbon Monoxide (PPM)</h4>
+<%= line_chart @snapshots.group_by_period(@period, :taken_at).average(:carbon_monoxide_ppm) %>
+
+<div class="text-center my-4">
   <%= link_to 'Back', devices_path, class: 'btn btn-light' %>
 </div>

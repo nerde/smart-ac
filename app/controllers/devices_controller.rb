@@ -1,7 +1,21 @@
 class DevicesController < APIController
+  include DaterangeParams
+
   def show
     @device = Device.find(params[:id])
     @last_snapshot = @device.snapshots.last
+
+    @since = since_filter
+    @upto = upto_filter
+    @range = (@since..@upto)
+    @snapshots = @device.snapshots.where(taken_at: @range)
+
+    diff = @snapshots.pluck(Arel.sql('max(taken_at)'), Arel.sql('min(taken_at)')).first.reduce(:-).to_i
+    @period = case
+              when diff > 120.days then :week
+              when diff > 7.days then :day
+              else :hour
+              end
   end
 
   def create

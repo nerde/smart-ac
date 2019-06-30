@@ -5,9 +5,12 @@ ruby '2.6.3'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
+gem 'chartkick'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'groupdate'
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
 gem 'kaminari'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
@@ -15,6 +18,7 @@ gem 'rack-attack'
 gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
@@ -30,9 +34,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-
 group :test do
   gem 'rspec'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
