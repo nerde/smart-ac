@@ -15,7 +15,10 @@ class DeviceSnapshotsController < APIController
       @device_snapshots = snapshots.map do |attributes|
         snapshot = @device.snapshots.build(attributes)
 
-        next snapshot if snapshot.save
+        if snapshot.save
+          snapshot.generate_issues
+          next snapshot
+        end
 
         render json: snapshot.errors, status: :unprocessable_entity
         raise ActiveRecord::Rollback

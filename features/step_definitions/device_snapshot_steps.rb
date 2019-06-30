@@ -16,7 +16,7 @@ Then('I should have the following device snapshots:') do |table|
 
   add_association_column(table, snapshots, 'device', &:serial_number)
 
-  table.map_column!(:taken_at, false) { |raw| Time.parse(raw) }
+  table.map_column!(:taken_at, false) { |raw| Time.zone.parse(raw) }
 
   table.diff!(snapshots)
 end

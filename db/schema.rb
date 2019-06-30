@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_213225) do
+ActiveRecord::Schema.define(version: 2019_06_30_184646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,20 @@ ActiveRecord::Schema.define(version: 2019_06_29_213225) do
     t.index ["auth_token"], name: "index_devices_on_auth_token", unique: true
   end
 
+  create_table "issues", force: :cascade do |t|
+    t.bigint "device_id", null: false
+    t.bigint "device_snapshot_id", null: false
+    t.datetime "occurred_at", null: false
+    t.datetime "resolved_at"
+    t.string "kind", null: false
+    t.bigint "resolved_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_issues_on_device_id"
+    t.index ["device_snapshot_id"], name: "index_issues_on_device_snapshot_id"
+    t.index ["resolved_by_id"], name: "index_issues_on_resolved_by_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +70,7 @@ ActiveRecord::Schema.define(version: 2019_06_29_213225) do
   end
 
   add_foreign_key "device_snapshots", "devices"
+  add_foreign_key "issues", "device_snapshots"
+  add_foreign_key "issues", "devices"
+  add_foreign_key "issues", "users", column: "resolved_by_id"
 end

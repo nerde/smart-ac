@@ -4,6 +4,7 @@ class Device < ApplicationRecord
   before_validation :ensure_auth_token, on: :create
 
   has_many :snapshots, class_name: 'DeviceSnapshot', dependent: :destroy
+  has_many :issues, dependent: :destroy
 
   scope :search, ->(query) { where(arel_table[:serial_number].matches("%#{query}%")) }
 
