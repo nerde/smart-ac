@@ -1,6 +1,8 @@
 class DevicesController < APIController
   include DaterangeParams
 
+  before_action :authenticate_user!, only: %i[show index]
+
   def show
     @device = Device.find(params[:id])
     @last_snapshot = @device.snapshots.last

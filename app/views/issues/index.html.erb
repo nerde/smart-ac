@@ -1,0 +1,29 @@
+<h1>Issues</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>Occurred At</th>
+      <th>Kind</th>
+      <th>Resolved At</th>
+      <th>Resolved By</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @issues.each do |issue| %>
+      <tr class="<%= 'text-muted' if issue.resolved? %>">
+        <td><%= link_to issue.device.description, issue.device %></td>
+        <td><%= l issue.occurred_at %></td>
+        <td><%= issue.kind %></td>
+        <td><%= l issue.resolved_at if issue.resolved_at %></td>
+        <td><%= issue.resolved_by&.email %></td>
+        <td><%= link_to 'Resolve', issue, method: :delete, data: { confirm: 'Mark this issue as resolved?' } unless issue.resolved? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @issues %>

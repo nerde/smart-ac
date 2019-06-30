@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Device:</strong>
+  <%= @issue.device %>
+</p>
+
+<p>
+  <strong>Device snapshot:</strong>
+  <%= @issue.device_snapshot %>
+</p>
+
+<p>
+  <strong>Occurred at:</strong>
+  <%= @issue.occurred_at %>
+</p>
+
+<p>
+  <strong>Resolved at:</strong>
+  <%= @issue.resolved_at %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @issue.kind %>
+</p>
+
+<p>
+  <strong>Resolved by:</strong>
+  <%= @issue.resolved_by %>
+</p>
+
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %>

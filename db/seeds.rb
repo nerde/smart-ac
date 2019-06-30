@@ -9,10 +9,12 @@ if ENV['SAMPLE_DATA'] == '1'
     minutes = 7 * 24 * 60
     status = %w[ok needs_service needs_new_filter gas_leak]
     minutes.times do |n|
-      device.snapshots.create!(taken_at: since + n.minutes, status: status.sample,
-                               temperature_celsius: (1500 + rand(1500)) / 100.0,
-                               humidity_percentage: (3500 + rand(2500)) / 100.0,
-                               carbon_monoxide_ppm: (4000 + rand(4000)) / 1000.0)
+      snap = device.snapshots.create!(taken_at: since + n.minutes, status: status.sample,
+                                      temperature_celsius: (1500 + rand(1500)) / 100.0,
+                                      humidity_percentage: (3500 + rand(2500)) / 100.0,
+                                      carbon_monoxide_ppm: (4000 + rand(4000)) / 1000.0)
+
+      snap.generate_issues
     end
   end
 end

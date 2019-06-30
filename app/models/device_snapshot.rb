@@ -3,7 +3,7 @@ class DeviceSnapshot < ApplicationRecord
 
   validates :taken_at, :temperature_celsius, :humidity_percentage, :carbon_monoxide_ppm, :status, presence: true
 
-  has_many :issues
+  has_many :issues, dependent: :destroy
 
   def generate_issues
     create_unique_issue('carbon_monoxide_over_limit') if carbon_monoxide_ppm > 9
@@ -13,7 +13,7 @@ class DeviceSnapshot < ApplicationRecord
   private
 
   def create_unique_issue(kind)
-    return if device.issues.where(kind: kind, resolved_at: nil).any?
+    return if device.issues.unresolved.where(kind: kind).any?
     issues.create!(device: device, occurred_at: taken_at, kind: kind)
   end
 end

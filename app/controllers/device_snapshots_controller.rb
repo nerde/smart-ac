@@ -1,6 +1,4 @@
 class DeviceSnapshotsController < APIController
-  before_action :set_device_snapshot, only: [:show, :edit, :update, :destroy]
-
   def create
     @device = Device.find_by!(auth_token: request.headers['Token'])
 

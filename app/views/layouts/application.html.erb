@@ -41,6 +41,15 @@
     </nav>
 
     <div class="container pt-2">
+      <% if params[:controller] != 'issues' && unresolved_issues_count.positive? %>
+        <div class="alert alert-warning" role="alert">
+          There <%= unresolved_issues_count > 1 ? 'are' : 'is' %>
+          <%= link_to issues_path do %>
+            <%= unresolved_issues_count %> unresolved <%= 'issue'.pluralize(unresolved_issues_count) %>
+          <% end %>!
+        </div>
+      <% end %>
+
       <% if notice.present? %>
         <div class="alert alert-info" role="alert">
           <%= notice %>
