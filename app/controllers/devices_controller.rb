@@ -12,7 +12,7 @@ class DevicesController < APIController
     @range = (@since..@upto)
     @snapshots = @device.snapshots.where(taken_at: @range)
 
-    diff = @snapshots.pluck(Arel.sql('max(taken_at)'), Arel.sql('min(taken_at)')).first.reduce(:-).to_i
+    diff = @snapshots.pluck(Arel.sql('max(taken_at)'), Arel.sql('min(taken_at)')).first.compact.reduce(:-).to_i
     @period = case
               when diff > 120.days then :week
               when diff > 7.days then :day
