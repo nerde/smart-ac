@@ -1,6 +1,7 @@
 class DevicesController < APIController
   def show
     @device = Device.find(params[:id])
+    @last_snapshot = @device.snapshots.last
   end
 
   def create

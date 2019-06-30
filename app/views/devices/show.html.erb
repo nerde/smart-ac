@@ -7,6 +7,21 @@
   <dd><%= @device.firmware_version %></dd>
 </dl>
 
+<h3>Last Snapshot</h3>
+
+<dl class="mt-2">
+  <dt>At</dt>
+  <dd><%= l @last_snapshot&.taken_at if @last_snapshot %></dd>
+  <dt>Status</dt>
+  <dd><%= @last_snapshot&.status || '-' %></dd>
+  <dt>Temperature</dt>
+  <dd><%= @last_snapshot&.temperature_celsius || '-' %> ºC</dd>
+  <dt>Humidity</dt>
+  <dd><%= @last_snapshot&.humidity_percentage || '-' %> %</dd>
+  <dt>Carbon Monoxide</dt>
+  <dd><%= @last_snapshot&.carbon_monoxide_ppm || '-' %> PPM</dd>
+</dl>
+
 <div class="text-center">
   <%= link_to 'Back', devices_path, class: 'btn btn-light' %>
 </div>
