@@ -2,7 +2,7 @@
 
 When('device {string} reports the following snapshots:') do |auth_token, table|
   header 'Token', auth_token
-  post device_snapshots_path, snapshots: table.hashes
+  post device_snapshots_path, snapshots: table.hashes, format: :json
 end
 
 Then('I should have the following device snapshots:') do |table|

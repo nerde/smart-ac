@@ -1,0 +1,12 @@
+<h1><%= @device.description %></h1>
+
+<dl class="mt-5">
+  <dt>Serial Number</dt>
+  <dd><%= @device.serial_number %></dd>
+  <dt>Firmware Version</dt>
+  <dd><%= @device.firmware_version %></dd>
+</dl>
+
+<div class="text-center">
+  <%= link_to 'Back', devices_path, class: 'btn btn-light' %>
+</div>

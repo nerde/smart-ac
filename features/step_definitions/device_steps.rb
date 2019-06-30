@@ -5,7 +5,7 @@ Given('the following devices:') do |table|
 end
 
 When('I create the following device:') do |table|
-  post devices_path, table.rows_hash
+  post devices_path, table.rows_hash.merge(format: :json)
 end
 
 Then('I should have the following devices:') do |table|
