@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+Given("the following device snapshots:") do |table|
+  table.map_column!(:device) { |name| Device.find_by!(name: name) }
+  DeviceSnapshot.create!(table.hashes)
+end
+
 When('device {string} reports the following snapshots:') do |auth_token, table|
   header 'Token', auth_token
   post device_snapshots_path, snapshots: table.hashes, format: :json
