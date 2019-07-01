@@ -41,7 +41,7 @@
     </nav>
 
     <div class="container pt-2">
-      <% if params[:controller] != 'issues' && unresolved_issues_count.positive? %>
+      <% if user_signed_in? && params[:controller] != 'issues' && unresolved_issues_count.positive? %>
         <div class="alert alert-warning" role="alert">
           There <%= unresolved_issues_count > 1 ? 'are' : 'is' %>
           <%= link_to issues_path do %>
