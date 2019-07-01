@@ -111,4 +111,8 @@ curl -X POST -H "Token: 502913748e00eaceb265d507c743c43e" -d '{"snapshots": [{"t
 
 ## Web Admin
 
-Default user/password is admin@smartac.com / 123456789
+Default user/password is admin@smartac.com / 123456789 (make sure you run `rake db:seed`).
+
+## Tests
+
+This app is tested by using Cucumber. To run the test suite, simply call `bundle exec cucumber`.
