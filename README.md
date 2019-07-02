@@ -116,3 +116,14 @@ Default user/password is admin@smartac.com / 123456789 (make sure you run `rake 
 ## Tests
 
 This app is tested by using Cucumber. To run the test suite, simply call `bundle exec cucumber`.
+
+## Things I would've done differently, given more time
+
+* Split frontend and backend/api
+  * Frontend in React
+  * Backend in pure Rails API, Sinatra or even Go (team decision, I would vote for a Rails API)
+* API documentation hosted by the app, probably built with Swagger
+* Issue notifications would be live, either by using web sockets or by checking with backend every few minutes
+* Test the graph queries with large amounts of data to make sure indexing is fine
+* Consider a NoSQL solution for the database because of the volume of snapshots
+  * Or dropping old data
