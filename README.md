@@ -4,7 +4,7 @@ Smart AC allows monitoring AC devices over time.
 
 ## API Endpoints
 
-### `POST /devices`
+### `POST /devices.json`
 
 Registers a new device. It returns an authentication token that allows the device to then send information for
 monitoring.
@@ -49,10 +49,10 @@ Sample error response (status `422`):
 Sample cURL command:
 
 ```
-curl -X POST -d '{"name": "Sample Device", "serial_number": "12345", "firmware_version": "1.0"}' -H 'Content-Type: application/json' https://diego-smart-ac.herokuapp.com/devices
+curl -X POST -d '{"name": "Sample Device", "serial_number": "12345", "firmware_version": "1.0"}' -H 'Content-Type: application/json' https://diego-smart-ac.herokuapp.com/devices.json
 ```
 
-### `POST /device_snapshots`
+### `POST /device_snapshots.json`
 
 Creates snapshots for a device. A snapshot is a set of information about a device at a given time.
 
@@ -106,7 +106,7 @@ It returns status `400 - Bad Request` if more than 500 items are sent at once.
 Sample cURL command:
 
 ```
-curl -X POST -H "Token: 502913748e00eaceb265d507c743c43e" -d '{"snapshots": [{"taken_at": "2019-06-29T00:00:00.000-00:00", "temperature_celsius": 25.53, "humidity_percentage": 43.32, "carbon_monoxide_ppm": 5.232, "status": "ok"}]}' -H 'Content-Type: application/json' https://diego-smart-ac.herokuapp.com/device_snapshots
+curl -X POST -H "Token: 502913748e00eaceb265d507c743c43e" -d '{"snapshots": [{"taken_at": "2019-06-29T00:00:00.000-00:00", "temperature_celsius": 25.53, "humidity_percentage": 43.32, "carbon_monoxide_ppm": 5.232, "status": "ok"}]}' -H 'Content-Type: application/json' https://diego-smart-ac.herokuapp.com/device_snapshots.json
 ```
 
 ## Web Admin
